@@ -1,0 +1,382 @@
+<html>
+
+<head>
+    <style>
+        .democlass {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+
+    <p id="demo">hiii</p>
+    <!--here hii is replaced by the script -->
+
+
+    <script>
+        //The innerHTML property is useful for getting or replacing the content of HTML elements.
+        document.getElementById("demo").innerHTML = "Hello World!";
+    </script>
+
+    <!-- Finding HTML Elements
+Method	Description
+document.getElementById(id)	                   Find an element by element id
+document.getElementsByTagName(name)            Find elements by tag name
+document.getElementsByClassName(name)	       Find elements by class name-->
+    <!-- example-->
+    <p>this is the paragraph text </p>
+
+    <script>
+        var value_p = document.getElementsByTagName('p');
+        console.log(value_p);
+    </script>
+    <!--
+
+    Changing HTML Elements
+Property	Description
+element.innerHTML =  new html content	         Change the inner HTML of an element
+element.attribute = new value	                 Change the attribute value of an HTML element
+element.style.property = new style	             Change the style of an HTML element
+    Method	Description
+element.setAttribute(attribute, value)	         Change the attribute value of an HTML element
+-->
+    <p id="change"> </p>
+    <script>
+        element = document.getElementById('change');
+        element.innerHTML = "printing by changing the element using js";
+
+
+        element.setAttribute("class", "democlass");
+        //check the  style tag for changes, above thing changes the color of the text after the class is changed
+
+        //or we can write below code both are same
+
+
+        element.className = 'democlass';
+
+
+        /*Adding and Deleting Elements
+Method	Description
+document.createElement(element)                       Create an HTML element
+document.removeChild(element)	                      Remove an HTML element
+document.appendChild(element)	                      Add an HTML element
+document.replaceChild(new, old)	                      Replace an HTML element
+document.write(text)	                              Write into the HTML output stream*/
+    </script>
+
+    <button onclick="myFunction()">if you click on this button you will get a button beside this</button>
+    <script>
+        function myFunction() {
+            var btn = document.createElement("BUTTON");
+            document.body.appendChild(btn);
+        }
+    </script>
+
+
+
+    <!--  removing child element from the html-->
+    <!-- below ul tag contains list of child like li  -->
+
+    <p> below we have ul having li childs when u click on the remove coffe that will remove</p>
+    <ul id="myList">
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ul>
+
+    <p>Click the button to remove the first item from the list.</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <script>
+        function myFunction() {
+            var list = document.getElementById("myList");
+
+
+            //removeChild method  will remove the childNodes 
+
+            list.removeChild(list.childNodes[0]);
+        }
+        //document.write directly writes in to html output stream
+        document.write("this text come from document.write form the line number 101")
+        document.write("<h5>document.URL</h5>")
+        document.write('<br>below text is showing the url of the document using the method document.URL written in line no 103')
+        document.write('<br>' + document.URL)
+    </script>
+    <p> Click the button to display the date. </p>
+
+    <!--below is the small loop this will change the numbers from 1 to n with given interval time with one incrementation-->
+
+    <button onclick="displayNumbers()"> The time is ? </button>
+    <p id="numbers"> </p>
+    <script>
+        var x = 0;
+
+        function displayNumbers() {
+            setInterval(new1, 10);
+        }
+
+        function new1() {
+            document.getElementById("numbers").innerHTML = x;
+            x++
+            if (x > 100000) {
+                clearInterval();
+            }
+        }
+    </script>
+
+
+
+
+
+    <h2>Finding HTML Elements by Query Selector</h2>
+
+    <p>Hello World!</p>
+
+    <p class="intro">The DOM is very useful.</p>
+    <p class="intro">This example demonstrates the <b>querySelectorAll</b> method.</p>
+
+    <p id="demo"></p>
+
+    <script>
+        var x = document.querySelectorAll("p.intro");
+        document.getElementById("demo").innerHTML =
+            'The first paragraph (index 0) with class="intro": ' + x[0].innerHTML;
+    </script>
+
+
+    <h2>Finding HTML Elements Using document.forms</h2>
+
+    <form id="frm1" action="/action_page.php">
+        First name: <input type="text" name="fname" value="Donald"><br> Last name: <input type="text" name="lname" value="Duck"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+
+    <!--DOM events-->
+
+    <!-- below will read the form using document.forms["form id "]-->
+    <p>Click "Try it" to display the value of each element in the form.</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+            var x = document.forms["frm1"];
+            var text = "";
+            var i;
+            for (i = 0; i < x.length; i++) {
+                text += x.elements[i].value + "<br>";
+            }
+            document.getElementById("demo").innerHTML = text;
+        }
+    </script>
+
+    <!--onchange event -->
+    <!--
+        onlclick
+        onchange
+        onmouseover, onmouseout
+        onmousedown,onmouseup
+        onload                               : on loading of page
+        onfocus                              : for input fields
+
+    -->
+    Enter your name: <input type="text" id="fname" onchange="myFunction()">
+
+    <p>When you leave the input field, a function is triggered which transforms the input text to upper case.</p>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("fname");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
+    <!-- the below code will take the select input if you select something the below code automatically changes to one of the options-->
+    <select id="selection" onchange="myfun()">
+        <option value="1">red</option>
+        <option value="2">yellow</option>
+        <option value="3">black</option>
+    </select>
+    <script>
+        function myfun() {
+            var x = document.getElementById("selection");
+            x.value = "3";
+        }
+    </script>
+
+    <!--onmouseout,onmouseover-->
+    <!-- the below code will give different text for both mouse over, mouse out-->
+
+    <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#D94A38;width:120px;height:20px;padding:40px;">
+        Mouse Over Me</div>
+
+    <script>
+        function mOver(obj) {
+            obj.innerHTML = "Thank You"
+        }
+
+        function mOut(obj) {
+            obj.innerHTML = "Mouse Over Me"
+        }
+    </script>
+
+
+    <!--onmousedown, onmouse up
+when we click mouse and hold it then we can call it as onmousedown if that is released then it is onmouseup
+-->
+    <div onmousedown="mDown(this)" onmouseup="mUp(this)" style="background-color:#D94A38;width:90px;height:20px;padding:40px;">
+        Click Me</div>
+
+    <script>
+        function mDown(obj) {
+            obj.style.backgroundColor = "#1ec5e5";
+            obj.innerHTML = "Release Me";
+        }
+
+        function mUp(obj) {
+            obj.style.backgroundColor = "#D94A38";
+            obj.innerHTML = "Thank You";
+        }
+    </script>
+
+    <body onload="mymessage()"></body>
+    <script>
+        function mymessage() {
+            alert("This message was triggered from the onload event");
+        }
+    </script>
+    Enter your name: <input type="text" onfocus="myFunction(this)" onchange="addcolor(this)">
+
+
+    <p>When the input field gets focus, a function is triggered which changes the background-color.</p>
+
+    <script>
+        function myFunction(x) {
+            x.style.background = "yellow";
+        }
+
+        function addcolor(id) {
+            id.style.background = "white";
+        }
+    </script>
+    <!--DOM  even listner-->
+    <!-- this will do same like event but addEventListener method is added-->
+
+    <h2>JavaScript addEventListener()</h2>
+
+    <p>This example uses the addEventListener() method to attach a click event to a button.</p>
+
+    <button id="myBtn">Try it</button>
+
+    <p id="demo"></p>
+
+    <script>
+        document.getElementById("myBtn").addEventListener("click", displayDate);
+
+        function displayDate() {
+            document.getElementById("demo").innerHTML = Date();
+        }
+    </script>
+
+    <!--  using resize event
+when it is capturing the resize it will give random numbers from below code
+-->
+    <h2>JavaScript addEventListener()</h2>
+
+    <p>This example uses the addEventListener() method on the window object.</p>
+
+    <p>Try resizing this browser window to trigger the "resize" event handler.</p>
+
+    <p id="demo"></p>
+
+    <script>
+        window.addEventListener("resize", function() {
+            document.getElementById("demo").innerHTML = Math.random();
+        });
+    </script>
+
+
+
+    <!--Event Bubbling or Event Capturing?  
+There are two ways of event propagation in the HTML DOM, bubbling and capturing.
+
+Event propagation is a way of defining the element order when an event occurs. If you have a <p> element inside a <div> element, and the user clicks on the <p> element, which element's "click" event should be handled first?
+
+In bubbling the inner most element's event is handled first and then the outer: the <p> element's click event is handled first, then the <div> element's click event.
+
+In capturing the outer most element's event is handled first and then the inner: the <div> element's click event will be handled first, then the <p> element's click event.
+
+With the addEventListener() method you can specify the propagation type by using the "useCapture" parameter:
+
+
+-->
+
+
+    #myDiv1, #myDiv2 { background-color: coral; padding: 50px; } #myP1, #myP2 { background-color: white; font-size: 20px; border: 1px solid; padding: 20px; }
+    </style>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    </head>
+
+    <body>
+
+        <h2>JavaScript addEventListener()</h2>
+
+        <div id="myDiv1">
+            <h2>Bubbling:</h2>
+            <p id="myP1">Click me!</p>
+        </div><br>
+
+        <div id="myDiv2">
+            <h2>Capturing:</h2>
+            <p id="myP2">Click me!</p>
+        </div>
+
+        <script>
+            document.getElementById("myP1").addEventListener("click", function() {
+                alert("You clicked the white element!");
+            }, false);
+
+            document.getElementById("myDiv1").addEventListener("click", function() {
+                alert("You clicked the orange element!");
+            }, false);
+
+            document.getElementById("myP2").addEventListener("click", function() {
+                alert("You clicked the white element!");
+            }, true);
+
+            document.getElementById("myDiv2").addEventListener("click", function() {
+                alert("You clicked the orange element!");
+            }, true);
+        </script>
+
+        <!-- even remover-->
+        <h2>JavaScript removeEventListener()</h2>
+
+        <div id="myDIV">
+            <p>This div element has an onmousemove event handler that displays a random number every time you move your mouse inside this orange field.</p>
+            <p>Click the button to remove the div's event handler.</p>
+            <button onclick="removeHandler()" id="myBtn">Remove</button>
+        </div>
+
+        <p id="demo"></p>
+
+        <script>
+            document.getElementById("myDIV").addEventListener("mousemove", myFunction);
+
+            function myFunction() {
+                document.getElementById("demo").innerHTML = Math.random();
+            }
+
+            function removeHandler() {
+                document.getElementById("myDIV").removeEventListener("mousemove", myFunction);
+            }
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,41 @@
+<html>
+
+<p id='blink_color'>this text color will blink</p>
+<button id='btn'>click to change the color</button>
+<button id='btn_stop'>stop blink</button>
+<script>
+    var p_value = document.getElementById('blink_color');
+    var b_value = document.getElementById('btn');
+    var b_stop_value = document.getElementById('btn_stop');
+
+
+    var t_f = true;
+
+    function color_blink() {
+        if (t_f == true) {
+            p_value.style.color = 'red';
+            p_value.style.backgroundColor = 'black';
+            t_f = false;
+        } else {
+            p_value.style.color = 'black';
+            p_value.style.backgroundColor = 'red';
+            t_f = true;
+        }
+
+
+    }
+
+    function setinterval() {
+        x = setInterval(color_blink, 1000);
+
+    }
+
+    function stopinterval() {
+        clearInterval(x);
+    }
+
+    b_value.addEventListener('click', setinterval);
+    b_stop_value.addEventListener('click', stopinterval);
+</script>
+
+</html>
